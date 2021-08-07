@@ -21,7 +21,7 @@ public class ModificationKitchenMain {
         kitchen.setId(1L);
         kitchen.setName("Brazilian");
 
-        registerKitchen.addKitchen(kitchen);
+        registerKitchen.saveKitchen(kitchen);
 
     }
 

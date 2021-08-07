@@ -23,8 +23,8 @@ public class InclusionKitchenMain {
         Kitchen kitchen2 = new Kitchen();
         kitchen2.setName("Japanese");
 
-        kitchen1 = registerKitchen.addKitchen(kitchen1);
-        kitchen2 = registerKitchen.addKitchen(kitchen2);
+        kitchen1 = registerKitchen.saveKitchen(kitchen1);
+        kitchen2 = registerKitchen.saveKitchen(kitchen2);
 
         System.out.printf("%d - %s\n", kitchen1.getId(), kitchen1.getName());
         System.out.printf("%d - %s\n", kitchen2.getId(), kitchen2.getName());

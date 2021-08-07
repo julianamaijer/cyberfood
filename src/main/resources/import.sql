@@ -1,8 +1,8 @@
 insert into kitchen (id, name) values (1, 'Thai');
 insert into kitchen (id, name) values (2, 'Indian');
 
-insert into restaurant (name, tax_shipping, kitchen_id) values ('Thai Gourmet', 11.90, 1);
-insert into restaurant (name, tax_shipping, kitchen_id) values ('Tuk tuk Indian', 12.90, 2);
+insert into restaurant (id, name, tax_shipping, kitchen_id) values (1, 'Thai Gourmet', 11.90, 1);
+insert into restaurant (id, name, tax_shipping, kitchen_id) values (2, 'Tuk tuk Indian Food', 12.90, 2);
 
 insert into state (name) values ('São Paulo');
 insert into state (name) values ('Rio de Janeiro');

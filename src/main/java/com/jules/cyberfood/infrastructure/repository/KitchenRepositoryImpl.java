@@ -2,6 +2,7 @@ package com.jules.cyberfood.infrastructure.repository;
 
 import com.jules.cyberfood.domain.model.Kitchen;
 import com.jules.cyberfood.domain.repository.KitchenRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,14 +33,19 @@ public class KitchenRepositoryImpl implements KitchenRepository {
 
     @Transactional
     @Override
-    public Kitchen addKitchen(Kitchen kitchen){
+    public Kitchen saveKitchen(Kitchen kitchen){
         return entityManager.merge(kitchen);
     }
 
     @Transactional
     @Override
-    public void removeKitchen(Kitchen kitchen){
-        kitchen = findById(kitchen.getId());
+    public void removeKitchen(Long id){
+        Kitchen kitchen = findById(id);
+
+        if (kitchen == null){
+            throw new EmptyResultDataAccessException(1);
+        }
+
         entityManager.remove(kitchen);
     }
 }

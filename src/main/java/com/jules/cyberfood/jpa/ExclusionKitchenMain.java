@@ -20,7 +20,7 @@ public class ExclusionKitchenMain {
         Kitchen kitchen = new Kitchen();
         kitchen.setId(1L);
 
-        registerKitchen.removeKitchen(kitchen);
+        registerKitchen.removeKitchen(kitchen.getId());
 
     }
 
