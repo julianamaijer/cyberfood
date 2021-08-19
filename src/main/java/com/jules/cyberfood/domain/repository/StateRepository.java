@@ -8,7 +8,7 @@ public interface StateRepository {
 
     List<State> allStates();
     State findById(Long id);
-    State addState(State state);
-    void removeState(State state);
+    State saveState(State state);
+    void removeState(Long id);
 
 }

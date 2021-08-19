@@ -9,8 +9,10 @@ com\jules\cyberfood\di\notification\NotificationSMS.class
 com\jules\cyberfood\jpa\ConsultPermissionMain.class
 com\jules\cyberfood\di\notification\NotificationEmail.class
 com\jules\cyberfood\listener\NotificationService.class
+com\jules\cyberfood\domain\service\RegisterKitchenService.class
 com\jules\cyberfood\jpa\FetchKitchenMain.class
 com\jules\cyberfood\jpa\ModificationKitchenMain.class
+com\jules\cyberfood\api\controller\RestaurantController.class
 com\jules\cyberfood\domain\repository\StateRepository.class
 com\jules\cyberfood\listener\IssueInvoiceService.class
 com\jules\cyberfood\infrastructure\repository\KitchenRepositoryImpl.class
@@ -18,7 +20,9 @@ com\jules\cyberfood\domain\model\City.class
 com\jules\cyberfood\jpa\InclusionRestaurantMain.class
 com\jules\cyberfood\domain\repository\PaymentRepository.class
 com\jules\cyberfood\infrastructure\repository\PermissionRepositoryImpl.class
+com\jules\cyberfood\api\controller\KitchenController.class
 com\jules\cyberfood\di\notification\NotifierProperties.class
+com\jules\cyberfood\domain\exception\EntityNotFoundException.class
 com\jules\cyberfood\jpa\ConsultKitchenRestaurantMain.class
 com\jules\cyberfood\CyberfoodApplication.class
 com\jules\cyberfood\domain\repository\PermissionRepository.class
@@ -39,9 +43,11 @@ com\jules\cyberfood\jpa\ConsultKitchenMain.class
 com\jules\cyberfood\jpa\ConsultRestaurantMain.class
 com\jules\cyberfood\di\model\Client.class
 com\jules\cyberfood\jpa\ExclusionRestaurantMain.class
+com\jules\cyberfood\api\controller\StateController.class
 com\jules\cyberfood\di\notification\UrgencyLevel.class
 com\jules\cyberfood\jpa\ConsultCityMain.class
 com\jules\cyberfood\domain\repository\CityRepository.class
 com\jules\cyberfood\di\notification\Notification.class
 com\jules\cyberfood\jpa\ExclusionKitchenMain.class
 com\jules\cyberfood\di\notification\NotificationType.class
+com\jules\cyberfood\domain\exception\EntityInUseException.class

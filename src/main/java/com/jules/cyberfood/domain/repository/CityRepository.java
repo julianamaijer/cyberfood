@@ -9,6 +9,6 @@ public interface CityRepository {
     List<City> allCities();
     City findById(Long id);
     City addCity(City city);
-    void removeCity(City city);
+    void removeCity(Long id);
 
 }

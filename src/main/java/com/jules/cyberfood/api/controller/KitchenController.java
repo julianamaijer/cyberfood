@@ -1,6 +1,5 @@
 package com.jules.cyberfood.api.controller;
 
-import com.jules.cyberfood.api.model.KitchensXmlWrapper;
 import com.jules.cyberfood.domain.exception.EntityInUseException;
 import com.jules.cyberfood.domain.exception.EntityNotFoundException;
 import com.jules.cyberfood.domain.model.Kitchen;
@@ -8,12 +7,9 @@ import com.jules.cyberfood.domain.repository.KitchenRepository;
 import com.jules.cyberfood.domain.service.RegisterKitchenService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,11 +27,6 @@ public class KitchenController {
     @GetMapping
     public List<Kitchen> listKitchen(){
         return kitchenRepository.allKitchens();
-    }
-
-    @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-    public KitchensXmlWrapper listXml(){
-        return new KitchensXmlWrapper(kitchenRepository.allKitchens());
     }
 
     @GetMapping("/{kitchenId}")

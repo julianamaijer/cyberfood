@@ -2,7 +2,9 @@ package com.jules.cyberfood.infrastructure.repository;
 
 import com.jules.cyberfood.domain.model.City;
 import com.jules.cyberfood.domain.repository.CityRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,13 +30,20 @@ public class CityRepositoryImpl implements CityRepository {
     }
 
     @Override
+    @Transactional
     public City addCity(City city) {
         return entityManager.merge(city);
     }
 
     @Override
-    public void removeCity(City city) {
-        city = findById(city.getId());
+    @Transactional
+    public void removeCity(Long id) {
+        City city = findById(id);
+
+        if (city == null){
+            throw new EmptyResultDataAccessException(1);
+        }
+
         entityManager.remove(city);
     }
 }

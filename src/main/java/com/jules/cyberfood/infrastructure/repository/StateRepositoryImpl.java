@@ -2,7 +2,9 @@ package com.jules.cyberfood.infrastructure.repository;
 
 import com.jules.cyberfood.domain.model.State;
 import com.jules.cyberfood.domain.repository.StateRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,7 +15,7 @@ import java.util.List;
 public class StateRepositoryImpl implements StateRepository {
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
     public List<State> allStates() {
@@ -26,14 +28,21 @@ public class StateRepositoryImpl implements StateRepository {
         return entityManager.find(State.class, id);
     }
 
+    @Transactional
     @Override
-    public State addState(State state) {
+    public State saveState(State state) {
         return entityManager.merge(state);
     }
 
+    @Transactional
     @Override
-    public void removeState(State state) {
-        state = findById(state.getId());
+    public void removeState(Long id) {
+        State state = findById(id);
+
+        if (state == null){
+            throw new EmptyResultDataAccessException(1);
+        }
+
         entityManager.remove(state);
     }
 }
