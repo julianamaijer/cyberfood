@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/states")
@@ -26,7 +27,7 @@ public class StateController {
     //método get lista:
     @GetMapping
     public List<State> listStates(){
-        return stateRepository.allStates();
+        return stateRepository.findAll();
     }
 
     //método post:
@@ -39,12 +40,12 @@ public class StateController {
     //método put:
     @PutMapping("/{stateId}")
     public ResponseEntity<State> updateState(@PathVariable Long stateId, @RequestBody State state){
-        State thisState = stateRepository.findById(stateId);
+        Optional<State> thisState = stateRepository.findById(stateId);
 
-        if (thisState != null){
+        if (thisState.isPresent()){
             BeanUtils.copyProperties(state, thisState, "id");
-            thisState = registerStateService.save(thisState);
-            return ResponseEntity.ok(thisState);
+            State saveState = registerStateService.save(thisState.get());
+            return ResponseEntity.ok(saveState);
         }
         return ResponseEntity.notFound().build();
     }

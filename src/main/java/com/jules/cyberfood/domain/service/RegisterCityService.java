@@ -23,22 +23,21 @@ public class RegisterCityService {
 
     public City save(City city){
         Long id = city.getState().getId();
-        State state = stateRepository.findById(id);
-
-        if (state == null){
-            throw new EntityNotFoundException(String.format("State %d doesn't exist.", id));
-        }
+        State state = stateRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("State %d doesn't exist.", id)));
 
         city.setState(state);
 
-        return cityRepository.addCity(city);
+        return cityRepository.save(city);
     }
 
     public void delete(Long id){
         try {
-            cityRepository.removeCity(id);
+            cityRepository.deleteById(id);
         }catch (EmptyResultDataAccessException e ){
             throw new EntityNotFoundException(String.format("City %d doesn't exist.", id));
+        }catch (DataIntegrityViolationException e){
+            throw new EntityInUseException("City %d can't be removed because  it's in use.");
         }
 
     }

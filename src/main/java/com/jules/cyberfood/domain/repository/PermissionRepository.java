@@ -1,14 +1,12 @@
 package com.jules.cyberfood.domain.repository;
 
 import com.jules.cyberfood.domain.model.Permission;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface PermissionRepository {
-
-    List<Permission> allPermissions();
-    Permission addPermission(Long id);
-    Permission findById(Permission permission);
-    void removePermission(Permission permission);
+@Repository
+public interface PermissionRepository extends JpaRepository<Permission, Long> {
 
 }

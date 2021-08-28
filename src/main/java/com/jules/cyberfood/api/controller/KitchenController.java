@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/kitchens")
@@ -26,27 +27,17 @@ public class KitchenController {
 
     @GetMapping
     public List<Kitchen> listKitchen(){
-        return kitchenRepository.allKitchens();
+        return kitchenRepository.findAll();
     }
 
     @GetMapping("/{kitchenId}")
     public ResponseEntity<Kitchen> fetchKitchen(@PathVariable Long kitchenId) {
-        Kitchen kitchen = kitchenRepository.findById(kitchenId);
-        //return ResponseEntity.status(HttpStatus.OK).body(kitchen);
+        Optional<Kitchen> kitchen = kitchenRepository.findById(kitchenId);
 
-        if(kitchen != null){
-            return ResponseEntity.ok(kitchen);
+        if(kitchen.isPresent()){
+            return ResponseEntity.ok(kitchen.get());
         }
         return ResponseEntity.notFound().build();
-
-/*        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.LOCATION, "http://local:8080/kitchens");
-
-        return ResponseEntity
-                .status(HttpStatus.FOUND)
-                .headers(headers)
-                .build();
-    }*/
     }
 
     @PostMapping
@@ -57,13 +48,12 @@ public class KitchenController {
 
     @PutMapping("/{kitchenId}")
     public ResponseEntity<Kitchen> updateKitchen(@PathVariable Long kitchenId, @RequestBody Kitchen kitchen){
-        Kitchen thisKitchen = kitchenRepository.findById(kitchenId);
+        Optional<Kitchen> thisKitchen = kitchenRepository.findById(kitchenId);
 
-        if (thisKitchen != null){
-            //thisKitchen.setName(kitchen.getName());
-            BeanUtils.copyProperties(kitchen, thisKitchen, "id");
-            thisKitchen = registerKitchenService.save(thisKitchen);
-            return ResponseEntity.ok(thisKitchen);
+        if (thisKitchen.isPresent()){
+            BeanUtils.copyProperties(kitchen, thisKitchen.get(), "id");
+            Kitchen saveKitchen = registerKitchenService.save(thisKitchen.get());
+            return ResponseEntity.ok(saveKitchen);
         }
         return ResponseEntity.notFound().build();
     }

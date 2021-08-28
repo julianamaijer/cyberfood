@@ -16,13 +16,13 @@ public class RegisterStateService {
     private StateRepository stateRepository;
 
     public State save(State state){
-        return stateRepository.saveState(state);
+        return stateRepository.save(state);
         //entity not found
     }
 
     public void delete(Long id){
         try {
-            stateRepository.removeState(id);
+            stateRepository.deleteById(id);
         }catch (DataIntegrityViolationException e){
             throw new EntityInUseException(String.format("State %d can't be removed because it's in use.", id));
         }catch (EmptyResultDataAccessException e){

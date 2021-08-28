@@ -1,13 +1,12 @@
 package com.jules.cyberfood.domain.repository;
 
 import com.jules.cyberfood.domain.model.Restaurant;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface RestaurantRepository {
+@Repository
+public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
-    List<Restaurant> allRestaurants();
-    Restaurant findById(Long id);
-    Restaurant addRestaurant(Restaurant restaurant);
-    void removeRestaurant(Restaurant restaurant);
 }

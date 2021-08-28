@@ -17,12 +17,12 @@ public class RegisterKitchenService {
 
     //it creates and updates the kitchen
     public Kitchen save(Kitchen kitchen){
-        return kitchenRepository.saveKitchen(kitchen);
+        return kitchenRepository.save(kitchen);
     }
 
     public void exclude(Long kitchenId){
         try {
-            kitchenRepository.removeKitchen(kitchenId);
+            kitchenRepository.deleteById(kitchenId);
         }catch (EmptyResultDataAccessException e ){
             throw new EntityNotFoundException(String.format("Kitchen %d doesn't exist.", kitchenId));
         }catch (DataIntegrityViolationException e){
